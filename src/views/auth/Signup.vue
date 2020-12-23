@@ -8,12 +8,12 @@
                         Registration
                     </h5>
                 </v-layout>
-                <v-layout v-if="getAuthResponse" row wrap justify-center>
+                <v-layout v-if="getAuthWarning" row wrap justify-center>
                     <v-alert
-                      :value="getAuthResponse"
+                      :value="getAuthWarning"
                       type="warning"
                     >
-                    {{getAuthResponse}}
+                    {{getAuthWarning}}
                     </v-alert>
                 </v-layout>
                 <v-form
@@ -52,12 +52,12 @@
                     ></v-text-field>
                     <p v-if="show1" class="error">the password you have given do not match</p>
 
-                    <v-checkbox
+                    <!-- <v-checkbox
                     v-model="checkbox"
                     :rules="[v => !!v || 'You must agree to continue!']"
                     label="Do you agree?"
                     required
-                    ></v-checkbox>
+                    ></v-checkbox> -->
 
                     <v-btn
                     :disabled="!valid"
@@ -121,7 +121,7 @@ import {mapGetters, mapActions} from 'vuex'
     }),
 
     computed:{
-      ...mapGetters(['isLoggedIn', 'getAuthResponse']), 
+      ...mapGetters(['isLoggedIn', 'getAuthWarning']), 
     },
 
     methods: {

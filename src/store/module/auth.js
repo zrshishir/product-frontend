@@ -8,7 +8,6 @@ const state = {
     errorStatus: "",
     successStatus: "",
     responseMsg: "",
-    userType: window.localStorage.getItem('userType'),
     test: ""
 };
 
@@ -36,8 +35,13 @@ const getters = {
             ]
         }
     },
-    getAuthResponse: (state) => {
+    getAuthWarning: (state) => {
         if(state.error){
+            return state.responseMsg
+        }
+    },
+    getAuthResponse: (state) => {
+        if(! state.error){
             return state.responseMsg
         }
     },
@@ -57,20 +61,19 @@ const actions = {
         }else{
             commit('setToken', response)
             window.localStorage.setItem('e-token', response.data.data.users.api_token)
-            window.localStorage.setItem('userType', response.data.data.users.user_type_id)
+            // window.localStorage.setItem('userType', response.data.data.users.user_type_id)
             router.push('/')
         }
     },
 
-    async register ({commit},allRegData) {
-       const response = await api.register(allRegData, 'signup')
+    async register ({commit}, allRegData) {
+       const response = await api.register(allRegData, 'register')
         if(response.data.error){
          commit('setAuthResponse', response)
          router.push('/signup')
         }else{
             commit('setToken', response)
-            window.localStorage.setItem('e-token', response.data.data.users.api_token)
-            window.localStorage.setItem('userType', response.data.data.users.user_type_id)
+            window.localStorage.setItem('e-token', response.data.data.token)
             router.push('/')
         }
     },
@@ -90,23 +93,25 @@ const mutations = {
     setToken: (state, response) => {
         if(response == ""){
             state.token = ""
+            state.error = 0
+            state.successStatus = 200
+            state.responseMsg = "You have successfully logged out."
         }else{
-            state.token = response.data.data.users.api_token
-            state.successStatus = response.statusCode
-            state.responseMsg = response.errorMsg
-            state.test = response.data.data.users
-            state.userType = response.data.data.users.user_type_id
+            state.token = response.data.data.token
+            state.error = response.data.error
+            state.successStatus = response.data.statusCode
+            state.responseMsg = response.data.message
         }
        
     },
     setTest: (state, response) => {
-        state.test = response
+        state.test = response.data
     },
     setAuthResponse: (state, response) => {
-        state.test = response
+        state.test = response.data
         state.error = response.data.error
         state.errorStatus = response.data.statusCode
-        state.responseMsg = response.data.errorMsg
+        state.responseMsg = response.data.message
     },
     setErrorToZero: (state) => {
         state.error = 0

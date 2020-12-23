@@ -30,44 +30,8 @@ export default{
         })
     },
 
-    logout(token){
-        return axios.get(`${ROOT_URL}/logout`,{
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    },
-
-    fetchAllData(token, apiUrl, fundingStatusId){
-        return axios.get(`${ROOT_URL}/${apiUrl}/${fundingStatusId}`,{
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    }, 
-
-    fetchData(token, apiUrl){
-        return axios.get(`${ROOT_URL}/${apiUrl}`,{
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    }, 
-
     storeData(token, secondUrl, storeData){
         return axios.post(`${ROOT_URL}/${secondUrl}`, storeData,{
-            headers:{
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    },
-
-    updateData(token, id, updateData, secondUrl){
-        return axios.put(`${ROOT_URL}/${secondUrl}/${id}`, updateData,{
             headers:{
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -82,23 +46,5 @@ export default{
                 'Content-Type': 'application/json'
             }
         })
-    },
-
-    getQuestion(token, apiUrl, lessonId){
-        return axios.get(`${ROOT_URL}/${apiUrl}/${lessonId}` , {
-            headers:{
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    },
-
-    changeDataStatus(token, itemId, apiUrl){
-        return axios.get(`${ROOT_URL}/${apiUrl}/${itemId}` , {
-            headers:{
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-    }
+    },   
 }
