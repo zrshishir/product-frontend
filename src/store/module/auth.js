@@ -55,13 +55,13 @@ const getters = {
 const actions = {
     async login ({commit}, allLogData) {
         const response = await api.login(allLogData, 'login')
-        if(response.data.error == 1){
+        commit('setTest', response)
+        if(response.data.error){
             commit('setAuthResponse', response)
             router.push('/signin')
         }else{
             commit('setToken', response)
-            window.localStorage.setItem('e-token', response.data.data.users.api_token)
-            // window.localStorage.setItem('userType', response.data.data.users.user_type_id)
+            window.localStorage.setItem('e-token', response.data.data.token)
             router.push('/')
         }
     },
