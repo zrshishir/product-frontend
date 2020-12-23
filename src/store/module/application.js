@@ -26,40 +26,23 @@ const getters = {
 }
 
 const actions = {
-    async indexData({rootState, commit}, parameters){
-        const{ token } = rootState.auth
-        const response = await api.fetchAllData(token, parameters[0],parameters[1])
-        commit('setAnswerResponse', response)
-    },
 
     async setIndexData({rootState, commit}, parameters){
         const{ token } = rootState.auth
-        const response = await api.fetchData(token, parameters[0])
+        const response = await api.getData(token, parameters[0])
         commit('setResponse', response)
     },
 
-    async store({rootState, commit},parameters){
+    async store({ rootState, commit},parameters){
         const { token } = rootState.auth
         const response = await api.storeData(token, parameters[0], parameters[1])
-        commit('setResponse', response)
-        // router.push('/task')
+        commit('setTest', response)
     },
     
     async delete({rootState, commit}, parameters){
         const { token } = rootState.auth
         const response = await api.deleteData(token, parameters[0], parameters[1])
         commit('setResponse', response)
-    },
-    async getLessonQuestion({rootState, commit}, parameters){
-        const { token } = rootState.auth
-        const response = await api.getQuestion(token, parameters[0], parameters[1])
-        commit('setResponse', response)
-    },
-
-    async responseUpdate({rootState, commit}, parameters){
-        const { token } = rootState.auth
-        const response = await api.storeData(token, parameters[0], parameters[1])
-        commit('setAnswerResponse', response)
     },
     
     setErrorZero({commit}){
@@ -69,28 +52,16 @@ const actions = {
 }
 
 const mutations = {
-    setAnswerResponse: (state, responseData) => {
-        
-        if(responseData.data.error == 1){
-            state.statusCode = responseData.data.statusCode
-            state.error = responseData.data.error
-            state.errorMsg = responseData.data.errorMsg
-        }else{
-            state.error = responseData.data.error
-            state.statusCode = responseData.data.statusCode
-            state.errorMsg = responseData.data.errorMsg
-        }
-    },
     setResponse: (state, responseData) => {
         // state.test = responseData
-        if(responseData.data.error == 1){
+        if(responseData.data.error){
             state.statusCode = responseData.data.statusCode
             state.error = responseData.data.error
-            state.errorMsg = responseData.data.errorMsg
+            state.errorMsg = responseData.data.message
         }else{
             state.error = responseData.data.error
             state.statusCode = responseData.data.statusCode
-            state.errorMsg = responseData.data.errorMsg
+            state.errorMsg = responseData.data.message
             state.indexData = responseData.data.data
         }
     },
@@ -99,7 +70,7 @@ const mutations = {
         state.responseMsg = ""
     },
     setTest: (state, credentials) => {
-        state.test = credentials[0] + '/' + credentials[1] + credentials[2]
+        state.test = credentials
     }
 }
 

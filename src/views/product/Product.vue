@@ -26,7 +26,7 @@
         >
             <template v-slot:top>
             <v-toolbar flat color="blue dark-accent 4">
-                <v-toolbar-title class="font-weight-bold">Course</v-toolbar-title>
+                <v-toolbar-title class="font-weight-bold">Product</v-toolbar-title>
                 <v-divider
                 class="mx-4"
                 inset
@@ -41,7 +41,7 @@
                     class="mb-2"
                     v-bind="attrs"
                     v-on="on"
-                    >New Course</v-btn>
+                    >New Product</v-btn>
                 </template>
                 <v-card>
                     <v-card-title>
@@ -51,16 +51,28 @@
                     <v-card-text>
                     <v-container>
                         <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.name" label="Course Name"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-select
-                            v-model="editedItem.active"
-                            :items="items"
-                            label="Active"
-                            ></v-select>
-                        </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                              <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                              <!-- <v-textarea
+                                name="input-7-1"
+                                label="Description"
+                                value=""
+                                v-model="editedItem.description"
+                                hint="description"
+                              ></v-textarea> -->
+                              <v-text-field v-model="editedItem.description" label="Description"></v-text-field>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col cols="12" sm="6" md="6">
+                              <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6" md="6">
+                              <v-file-input accept=".png" v-model="editedItem.image" label="Image"></v-file-input>
+                              <!-- <v-text-field v-model="editedItem.image" label="Image"></v-text-field> -->
+                          </v-col>
                         </v-row>
                     </v-container>
                     </v-card-text>
@@ -130,29 +142,35 @@ import { mapGetters } from 'vuex'
   export default {
     data: () => ({
       dialog: false,
-      apiUrl: 'course',
+      apiUrl: 'product',
       alert:true,
       headers: [
-        { text: 'Course Name', align: 'start', value: 'name'},
-        { text: 'Active', value: 'active' },
+        { text: 'Title', align: 'start', value: 'title'},
+        { text: 'Description', value: 'description' },
+        { text: 'Price', value: 'price' },
+        { text: 'Image', value: 'image' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       items: [0 , 1],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        active: 1,
+        title: '',
+        description: '',
+        price: '',
+        image: [],
       },
       defaultItem: {
-        name: '',
-        active: 1,
+        title: '',
+        description: '',
+        price: '',
+        image: [],
       },
     }),
 
     computed: {
         ...mapGetters(['isLoggedIn', 'indexData', 'error', 'statusCode', 'errorMsg']),
       formTitle () {
-        return this.editedIndex === -1 ? 'New Course' : 'Edit Course'
+        return this.editedIndex === -1 ? 'New Product' : 'Edit Product'
       },
     },
 
@@ -196,6 +214,7 @@ import { mapGetters } from 'vuex'
       },
 
       save () {
+        console.log(this.editedItem)
         if (this.editedIndex > -1) {
           this.$store.dispatch('store', [this.apiUrl, this.editedItem])
           Object.assign(this.indexData[this.editedIndex], this.editedItem)
