@@ -30,8 +30,7 @@
 	The working procedure is described below with screenshots:
 	1. To install this project you will have node installed. I will describe it using `npm`. You can install this project two ways
 		- Download the zip file from the repository and extract it on your pc
-		- clone the project using git and the command is `git clone git@github.com:zrshishir/product-frontend.git`. 
-					![git clone](screenshots/1.png)
+		- clone the project using git and the command is `git clone git@github.com:zrshishir/product-frontend.git`: ![git clone](/screenshots/1.png)
 
 	2. Go to the project's root directory and run the command `npm install`
 					![go to root directory](screenshots/2.png)
