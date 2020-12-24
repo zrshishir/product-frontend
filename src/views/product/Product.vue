@@ -12,8 +12,15 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
-        </template>
+            </v-row>
+            </template>
+            <v-alert
+              v-if="!error"
+              dense
+              type="info"
+            >
+              {{errorMsg}}
+            </v-alert>
 
         <template v-if="! indexData">
             <v-data-table item-key="name" class="elevation-1" loading loading-text="Loading... Please wait"></v-data-table>

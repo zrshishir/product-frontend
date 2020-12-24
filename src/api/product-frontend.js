@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-
-const ROOT_URL = 'http://local.product-backend.com/api';
+//write your laravel project url like local.product.com or localhost url
+const ROOT_URL = 'local.product-backend.com/api';
 
 
 export default{
