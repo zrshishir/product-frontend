@@ -1,4 +1,11 @@
-# product crud front end crud project
+# product front end crud project
+
+## Tech Specifications
+	- "core-js": "^3.6.5",
+    - "vue": "^2.6.11",
+    - "vue-router": "^3.2.0",
+    - "vuetify": "^2.2.11",
+    - "vuex": "^3.4.0"
 
 ## Project setup
 ```
