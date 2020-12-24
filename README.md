@@ -83,7 +83,6 @@
 
 	8. Product delete page
 
-<<<<<<< HEAD
 ![product delete](/screenshots/12.png)
 
 	9. Log out message					
