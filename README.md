@@ -31,45 +31,59 @@
 	1. To install this project you will have node installed. I will describe it using `npm`. You can install this project two ways
 		- Download the zip file from the repository and extract it on your pc
 		- clone the project using git and the command is `git clone git@github.com:zrshishir/product-frontend.git`. 
+
 ![git clone](/screenshots/1.png)
 
 	2. Go to the project's root directory and run the command `npm install`
+
 ![go to root directory](/screenshots/2.png)
+
 ![npm install](/screenshots/3.png)
 
 	3. Go to the `/src/api` directory and edit the `product-frontend.js`. Assign your domain name with `ROOT_URL`. 
 			`const ROOT_URL = 'your-domain-name/api'`
+
 ![root url setting](/screenshots/root_url.png)
 
 	4. Go to your root direcotory and run `npm run serve`
+
 ![run the project](/screenshots/npm-run-serve.png)
 
 ### Some screenshots of the project
 	1. Home page 
+
 ![home page](/screenshots/4.png)
 
 	2. Sign up or Registration page
+
 ![sign up](/screenshots/5.png)
+
 ![sign up validation page](/screenshots/6.png)
 
 	3. Login or Sign in page
+
 ![sign in page](/screenshots/7.png)
 
 	4. Registration or login message on home page with log out button and product menu
+
 ![message home page](/screenshots/8.png)
 
 	5. Product page
+
 ![product page](/screenshots/9.png)
 
 	6. Product creation page
+
 ![product creation page](/screenshots/10.png)
 
 	7. Product edit page
+
 ![product edit page](/screenshots/11.png)
 
 	8. Product delete page
+
 ![product delete](/screenshots/12.png)
 
-	9. Log out message
-					
+	9. Log out message					
+
 ![log out message on home page](/screenshots/13.png)
