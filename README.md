@@ -89,7 +89,4 @@
 	9. Log out message					
 
 ![log out message on home page](/screenshots/13.png)
-=======
-	9. Log out message
-					![log out message on home page](screenshots/13.png)
->>>>>>> e1308731ecd880a3cd293ba33530575ca82a801a
+
