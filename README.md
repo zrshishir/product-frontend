@@ -30,6 +30,7 @@
 	The working procedure is described below with screenshots:
 	1. To install this project you will have node installed. I will describe it using `npm`. You can install this project two ways
 		- Download the zip file from the repository and extract it on your pc
+
 		- clone the project using git and the command is `git clone git@github.com:zrshishir/product-frontend.git`. 
 
 ![git clone](/screenshots/1.png)
@@ -82,8 +83,13 @@
 
 	8. Product delete page
 
+<<<<<<< HEAD
 ![product delete](/screenshots/12.png)
 
 	9. Log out message					
 
 ![log out message on home page](/screenshots/13.png)
+=======
+	9. Log out message
+					![log out message on home page](screenshots/13.png)
+>>>>>>> e1308731ecd880a3cd293ba33530575ca82a801a
