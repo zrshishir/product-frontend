@@ -4,7 +4,7 @@
           <v-row justify="center">
             <v-dialog v-model="error" persistent max-width="500">
               <v-card>
-                <v-card-title class="headline deep-orange">Access Warning</v-card-title>
+                <v-card-title class="headline deep-orange">Warning</v-card-title>
                 <v-card-text>{{errorMsg}}</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -70,7 +70,14 @@
                               <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                              <v-file-input accept=".png" v-model="editedItem.image" label="Image"></v-file-input>
+                            <input
+                                type="file"
+                                
+                                ref="image"
+                                accept="image/*"
+                                @change="onFilePicked"
+                              >
+                              <!-- <v-file-input accept=".png" v-model="editedItem.image" label="Image"></v-file-input> -->
                               <!-- <v-text-field v-model="editedItem.image" label="Image"></v-text-field> -->
                           </v-col>
                         </v-row>
@@ -85,6 +92,9 @@
                 </v-card>
                 </v-dialog>
             </v-toolbar>
+            </template>
+            <template v-slot:item.image="{ item }">
+                <img :src="getUrl + item.image" style="width: 50px; height: 50px" />
             </template>
             <template v-slot:item.actions="{ item }">
             <v-icon
@@ -157,18 +167,18 @@ import { mapGetters } from 'vuex'
         title: '',
         description: '',
         price: '',
-        image: [],
+        image: '',
       },
       defaultItem: {
         title: '',
         description: '',
         price: '',
-        image: [],
+        image: '',
       },
     }),
 
     computed: {
-        ...mapGetters(['isLoggedIn', 'indexData', 'error', 'statusCode', 'errorMsg']),
+        ...mapGetters(['isLoggedIn', 'indexData', 'error', 'statusCode', 'errorMsg', 'getUrl']),
       formTitle () {
         return this.editedIndex === -1 ? 'New Product' : 'Edit Product'
       },
@@ -213,14 +223,30 @@ import { mapGetters } from 'vuex'
         })
       },
 
+      onFilePicked (e) {
+        const files = e.target.files
+        if(files[0] !== undefined) {
+          this.editedItem.image = files[0].name
+          
+          if(this.editedItem.image.lastIndexOf('.') <= 0) {
+            return
+          }
+          const fr = new FileReader ()
+          fr.readAsDataURL(files[0])
+          fr.addEventListener('load', () => {
+            this.editedItem.image = fr.result
+            // this.editedItem.imageUrl = files[0] // this is an image file that can be sent to server...
+          })
+        } 
+      },
+
       save () {
-        console.log(this.editedItem)
         if (this.editedIndex > -1) {
           this.$store.dispatch('store', [this.apiUrl, this.editedItem])
-          Object.assign(this.indexData[this.editedIndex], this.editedItem)
+          // Object.assign(this.indexData[this.editedIndex], this.editedItem)
         } else {
           this.$store.dispatch('store', [this.apiUrl, this.editedItem])
-          this.indexData.push(this.editedItem)
+          // this.indexData.push(this.editedItem)
         }
         this.close()
       },

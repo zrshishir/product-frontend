@@ -8,7 +8,8 @@ const state = {
     errorStatus: "",
     successStatus: "",
     responseMsg: "",
-    test: ""
+    test: "",
+    url: window.localStorage.getItem('url')
 };
 
 const getters = {
@@ -34,6 +35,9 @@ const getters = {
                 },
             ]
         }
+    },
+    getUrl: (state) => {
+        return state.url
     },
     getAuthWarning: (state) => {
         if(state.error){
@@ -62,6 +66,7 @@ const actions = {
         }else{
             commit('setToken', response)
             window.localStorage.setItem('e-token', response.data.data.token)
+            window.localStorage.setItem('url', response.data.data.url)
             router.push('/')
         }
     },
@@ -74,6 +79,7 @@ const actions = {
         }else{
             commit('setToken', response)
             window.localStorage.setItem('e-token', response.data.data.token)
+            window.localStorage.setItem('url', response.data.data.url)
             router.push('/')
         }
     },
@@ -81,6 +87,7 @@ const actions = {
     async logout({ commit }){ // we use commit instead of mutations there are several reasons for that. there might be several request  
         commit('setToken', "")
         window.localStorage.removeItem('e-token')
+        window.localStorage.removeItem('url')
         router.push('/')
     },
 
@@ -98,6 +105,7 @@ const mutations = {
             state.responseMsg = "You have successfully logged out."
         }else{
             state.token = response.data.data.token
+            state.url = response.data.data.url
             state.error = response.data.error
             state.successStatus = response.data.statusCode
             state.responseMsg = response.data.message

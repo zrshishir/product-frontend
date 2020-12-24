@@ -33,10 +33,10 @@ const actions = {
         commit('setResponse', response)
     },
 
-    async store({ rootState, commit},parameters){
+    async store({ rootState, commit}, parameters){
         const { token } = rootState.auth
         const response = await api.storeData(token, parameters[0], parameters[1])
-        commit('setTest', response)
+        commit('setResponse', response)
     },
     
     async delete({rootState, commit}, parameters){
@@ -53,7 +53,7 @@ const actions = {
 
 const mutations = {
     setResponse: (state, responseData) => {
-        // state.test = responseData
+        
         if(responseData.data.error){
             state.statusCode = responseData.data.statusCode
             state.error = responseData.data.error

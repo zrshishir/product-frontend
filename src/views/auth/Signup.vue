@@ -106,7 +106,6 @@ import {mapGetters, mapActions} from 'vuex'
         v => /.+.@.+/.test(v) || 'E-mail must be valid',
       ],
 
-      
       passwordRules: [
             v => !!v || 'password is required',
             v => (v && v.length > 5) || 'minimum 6 characters',
