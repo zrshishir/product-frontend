@@ -1,6 +1,8 @@
 # product front end crud project
 
 ## Tech Specifications
+	- "nodejs": "12"
+	- "npm" : "6"
 	- "core-js": "^3.6.5".
     - "vue": "^2.6.11".
     - "vue-router": "^3.2.0".
